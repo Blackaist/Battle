@@ -35,7 +35,6 @@ namespace Project.Player
 					}
 					else
 					{
-						Debug.Log($"Do damage for: {gameObject.name} : {_currentHP - Mathf.Min(value, _entityData.Stats.HP)}");
 						_currentHP = Mathf.Min(value, _entityData.Stats.HP);
 					}
 
@@ -52,7 +51,6 @@ namespace Project.Player
 			{
 				if (_currentShield != value)
 				{
-					Debug.Log($"Do SHIELD damage for: {gameObject.name} : {_currentShield - value}");
 					_currentShield = Mathf.Max(value, 0);
 					RedrawShieldBar();
 				}
