@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.32f1
+CRC: 3442509131
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ec010107d2080b4ebf161b83af670267
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e92f15c00bad3f0047ed3c80fd89a851
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 4308d5b9de2ba12ab64c037516a66f1f
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 8b3db70ce51084345864634974c724bf, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Scriptable Objects/Ability/Effects/BurningEffect.asset
+Dependencies: []

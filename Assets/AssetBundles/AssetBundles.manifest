@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.32f1
+CRC: 1263590390
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ability
+      Dependencies:
+        Dependency_0: effect
+    Info_1:
+      Name: entity
+      Dependencies: {}
+    Info_2:
+      Name: effect
+      Dependencies: {}

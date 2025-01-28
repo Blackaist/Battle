@@ -1,0 +1,12 @@
+{
+    "locales": [
+        {
+            "Key": "select_hero_label",
+            "Value": "Выбери героя"
+        },
+        {
+            "Key": "other_text_label",
+            "Value": "Просто текст"
+        }
+    ]
+}

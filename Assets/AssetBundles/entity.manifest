@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.32f1
+CRC: 3489025333
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 68a1c55953bd2c52cad7389d94f98083
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: afa8992971e255886dc67a067171c9e8
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 595507790e85a5e2a78863a233a556dd
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a837b9286aab3b944b5e27049ac726ae, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: .EntityStats
+Assets:
+- Assets/Scriptable Objects/Entity/Enemy.asset
+- Assets/Scriptable Objects/Entity/Wizard.asset
+- Assets/Scriptable Objects/Entity/Warrior.asset
+- Assets/Sprites/Basic.png
+- Assets/Scriptable Objects/Entity/Human.asset
+Dependencies: []

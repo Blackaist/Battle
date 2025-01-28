@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a837b9286aab3b944b5e27049ac726ae, type: 3}
+  m_Name: Human
+  m_EditorClassIdentifier: 
+  _name: Human
+  _entityColor: {r: 0.1986472, g: 0.4528302, b: 0.25963804, a: 1}
+  _entityModel: {fileID: 21300000, guid: 4b84f736c3a8ef14baa8305e54f7427a, type: 3}
+  _stats:
+    _hp: 60
+    _attack: 8
+    _magic: 5
+    _def: 2
