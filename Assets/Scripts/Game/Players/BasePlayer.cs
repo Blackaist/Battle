@@ -2,24 +2,27 @@ using Project.Ability;
 using Project.Effect;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Project.Player
 {
 	public abstract class BasePlayer : MonoBehaviour, IPlayer
 	{
 		[SerializeField] private SpriteRenderer _playerModel = null;
-		[SerializeField] private Slider _playerBarSlider = null;
-		[SerializeField] private Text _hpText = null;
-		[SerializeField] private Text _shieldText = null;
 
 		protected List<IAbility> _abilities = new();
 		protected List<IEffect> _effects = new();
 
 		protected EntityObject _entityData = null;
+
+		public event Action<IAbility> AbilityExecuted = null;
+		public event Action<IEffect> EffectAdded = null;
+
+		public event Action HPUpdated = null;
+		public event Action ShieldUpdated = null;
+
+		public event Action TurnStarted = null;
+		public event Action TurnEnded = null;
 
 		private int _currentHP = 0;
 		public int CurrentHP
@@ -38,7 +41,7 @@ namespace Project.Player
 						_currentHP = Mathf.Min(value, _entityData.Stats.HP);
 					}
 
-					RedrawHPBar();
+					HPUpdated?.Invoke();
 				}
 			}
 		}
@@ -52,17 +55,12 @@ namespace Project.Player
 				if (_currentShield != value)
 				{
 					_currentShield = Mathf.Max(value, 0);
-					RedrawShieldBar();
+					ShieldUpdated?.Invoke();
 				}
 			}
 		}
 
 		public EntityStats GetStats => _entityData.Stats;
-
-		public Action<IAbility> OnAbilityExecuted { get; set; }
-		public Action<IEffect> OnEffectAdded { get; set; }
-		public Action OnTurnStarted { get; set; }
-		public Action OnTurnEnded { get; set; }
 
 		public abstract void ExecuteAbility(string abilityName);
 
@@ -80,7 +78,7 @@ namespace Project.Player
 
 			RemoveAllExpiredEffects();
 
-			OnTurnStarted?.Invoke();
+			TurnStarted?.Invoke();
 		}
 
 		public virtual void EndTurn()
@@ -92,7 +90,7 @@ namespace Project.Player
 
 			RemoveAllExpiredEffects();
 
-			OnTurnEnded?.Invoke();
+			TurnEnded?.Invoke();
 		}
 
 		public void Init(List<IAbility> abilities, EntityObject entity)
@@ -135,10 +133,8 @@ namespace Project.Player
 
 		public void Restart()
 		{
-			_currentHP = _entityData.Stats.HP;
-
-			RedrawHPBar();
-			RedrawShieldBar();
+			CurrentHP = _entityData.Stats.HP;
+			CurrentShield = 0;
 
 			foreach (var ability in _abilities)
 			{
@@ -160,7 +156,7 @@ namespace Project.Player
 			else
 			{
 				_effects.Add(effect);
-				OnEffectAdded?.Invoke(effect);
+				EffectAdded?.Invoke(effect);
 			}
 		}
 
@@ -180,24 +176,9 @@ namespace Project.Player
 			_effects.Clear();
 		}
 
-		private void RedrawHPBar()
+		protected void OnAbilityExecuted(IAbility param)
 		{
-			var maxHP = _entityData.Stats.HP;
-			_playerBarSlider.value = (float)CurrentHP / maxHP;
-
-			_hpText.text = string.Format("{0}/{1}", _currentHP, maxHP);
-		}
-
-		private void RedrawShieldBar()
-		{
-			if (_currentShield > 0)
-			{
-				_shieldText.text =  string.Format("Shield: {0}", _currentShield.ToString());
-			}
-			else
-			{
-				_shieldText.text = "";
-			}
+			AbilityExecuted?.Invoke(param);
 		}
 	}
 }

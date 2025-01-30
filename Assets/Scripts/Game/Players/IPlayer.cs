@@ -7,11 +7,14 @@ namespace Project.Player
 {
 	public interface IPlayer
 	{
+		event Action<IAbility> AbilityExecuted;
+		event Action<IEffect> EffectAdded;
+		event Action HPUpdated;
+		event Action ShieldUpdated;
+
 		EntityStats GetStats { get; }
 		public int CurrentHP { get; }
 		public int CurrentShield { get; }
-
-		Action<IAbility> OnAbilityExecuted { get; set; }
 
 		void Init(List<IAbility> abilities, EntityObject entity);
 

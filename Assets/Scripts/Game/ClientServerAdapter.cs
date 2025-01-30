@@ -31,7 +31,7 @@ public class ClientServerAdapter : IClientServerAdapter
 
 	public void OnServerSetEntity(EntityObject leftEntity, EntityObject rightEntity)
 	{
-		_client.SetEntity(leftEntity, rightEntity);
+		_client.OnSetEntity(leftEntity, rightEntity);
 	}
 
 	public void OnClientAbilitySelect(string ability)
@@ -51,6 +51,6 @@ public class ClientServerAdapter : IClientServerAdapter
 
 	public void OnServerNextTurn(bool isLeftTurn)
 	{
-		_client.OnNextTurn(isLeftTurn);
+		_client.NextTurn(isLeftTurn);
 	}
 }

@@ -34,7 +34,7 @@ namespace Project
 
 		public void Init(IReadOnlyCollection<IAbility> datas)
         {
-			ClearButtons();
+			DestroyButtons();
 
 			foreach (var data in datas)
             {
@@ -87,7 +87,7 @@ namespace Project
             OnAbilityPressed?.Invoke(abilityName);
 		}
 
-        private void ClearButtons()
+        private void DestroyButtons()
         {
 			if (_buttons.Count > 0)
 			{

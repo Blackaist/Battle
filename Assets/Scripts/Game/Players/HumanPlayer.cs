@@ -12,7 +12,7 @@ namespace Project.Player
 			if (ability != null)
 			{
 				ability.Execute();
-				OnAbilityExecuted?.Invoke(ability);
+				OnAbilityExecuted(ability);
 			}
 		}
 	}

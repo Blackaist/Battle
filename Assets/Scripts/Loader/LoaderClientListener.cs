@@ -9,12 +9,12 @@ public class LoaderClientListener : MonoBehaviour
 	{
 		_sceneLoader.AddTask();
 
-		ClientManager.Instance.OnLoaded += OnAssetsLoaded;
+		ClientManager.Instance.Loaded += OnAssetsLoaded;
 	}
 
 	private void OnAssetsLoaded()
 	{
-		ClientManager.Instance.OnLoaded -= OnAssetsLoaded;
+		ClientManager.Instance.Loaded -= OnAssetsLoaded;
 
 		_sceneLoader.RemoveTask();
 	}

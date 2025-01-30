@@ -25,16 +25,16 @@ namespace Project.UI
 		{
 			ClearAll();
 
-			_player.OnTurnStarted += UpdateEffects;
-			_player.OnTurnEnded += UpdateEffects;
-			_player.OnEffectAdded += AddEffect;
+			_player.TurnStarted += UpdateEffects;
+			_player.TurnEnded += UpdateEffects;
+			_player.EffectAdded += AddEffect;
 		}
 
 		private void OnDisable()
 		{
-			_player.OnTurnStarted -= UpdateEffects;
-			_player.OnTurnEnded -= UpdateEffects;
-			_player.OnEffectAdded -= AddEffect;
+			_player.TurnStarted -= UpdateEffects;
+			_player.TurnEnded -= UpdateEffects;
+			_player.EffectAdded -= AddEffect;
 		}
 
 		private void UpdateEffects()

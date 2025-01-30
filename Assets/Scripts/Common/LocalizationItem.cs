@@ -21,7 +21,7 @@ namespace Project
 		{
 			if (GameSettings.Instance != null)
 			{
-				GameSettings.Instance.OnLocalizationUpdated += UpdateText;
+				GameSettings.Instance.LocalizationUpdated += UpdateText;
 			}
 		}
 
@@ -29,7 +29,7 @@ namespace Project
 		{
 			if (gameObject != null && GameSettings.Instance != null)
 			{
-				GameSettings.Instance.OnLocalizationUpdated -= UpdateText;
+				GameSettings.Instance.LocalizationUpdated -= UpdateText;
 			}
 		}
 

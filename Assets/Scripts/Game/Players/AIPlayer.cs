@@ -28,7 +28,7 @@ namespace Project.Player
 			var abilityIndex = random.Next(0, abilities.Count);
 
 			abilities[abilityIndex].Execute();
-			OnAbilityExecuted?.Invoke(abilities[abilityIndex]);
+			OnAbilityExecuted(abilities[abilityIndex]);
 		}
 	}
 }

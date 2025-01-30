@@ -14,10 +14,10 @@ namespace Project
 		private Coroutine _coroutine = null;
 
 
-		public Action OnLoaded = null;
-		public Action<EntityObject, EntityObject> OnSetEntity = null;
-		public Action<string> OnAbilitySelected = null;
-		public Action<bool> OnNextTurn = null;
+		public Action Loaded = null;
+		public Action<EntityObject, EntityObject> SetEntity = null;
+		public Action<string> AbilitySelected = null;
+		public Action<bool> NextTurn = null;
 
 		public IReadOnlyCollection<EntityObject> Entities => _adapter.Entities();
 		public IReadOnlyCollection<AbilityData> Abilities => _adapter.Abilities();
@@ -71,7 +71,7 @@ namespace Project
 				yield return null;
 			}
 
-			OnLoaded?.Invoke();
+			Loaded?.Invoke();
 		}
 
 		public void SelectEntity(EntityObject entity)
@@ -79,13 +79,13 @@ namespace Project
 			_adapter.OnClientSelectedEntity(entity);
 		}
 
-		public void SetEntity(EntityObject leftEntity, EntityObject rightEntity) => OnSetEntity?.Invoke(leftEntity, rightEntity);
+		public void OnSetEntity(EntityObject leftEntity, EntityObject rightEntity) => SetEntity?.Invoke(leftEntity, rightEntity);
 
 		public void OnClientAbilitySelected(string ability) => _adapter.OnServerAbilitySelect(ability);
-		public void OnServerAbilitySelected(string ability) => OnAbilitySelected?.Invoke(ability);
+		public void OnServerAbilitySelected(string ability) => AbilitySelected?.Invoke(ability);
 
 		public void OnClientNextTurn(bool isLeftTurn) => _adapter.OnClientNextTurn(isLeftTurn);
 
-		public void OnServerNextTurn(bool isLeftTurn) => OnNextTurn?.Invoke(isLeftTurn);
+		public void OnServerNextTurn(bool isLeftTurn) => NextTurn?.Invoke(isLeftTurn);
 	}
 }

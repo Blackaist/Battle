@@ -13,16 +13,15 @@ namespace Project
 		public readonly string Locale => defaultLocale;
 	}
 
-	public sealed class GameSettings : MonoBehaviour
+	public sealed class GameSettings : SingletonScene<GameSettings>
 	{
-		public static GameSettings Instance { get; private set; } = null;
-
 		private const string _settingsName = "Settings.json";
 		private const string _saveName = "Save.dat";
 
 
 		private SettingsData _settings = default;
 		public SettingsData Settings => _settings;
+
 
 		private Localization _localization = null;
 		public Localization Localization => _localization;
@@ -31,30 +30,10 @@ namespace Project
 		private JSONLoader<SettingsData> _settingsLoader = null;
 		private JSONLoader<SettingsData> _saveLoader = null;
 
-		public Action OnSettingsUpdated = null;
-		public Action OnLocalizationUpdated = null;
 
+		public event Action SettingsUpdated = null;
+		public event Action LocalizationUpdated = null;
 
-		public void Awake()
-		{
-			if (Instance == null)
-			{
-				Instance = this;
-				DontDestroyOnLoad(gameObject);
-			}
-			else
-			{
-				Destroy(this);
-			}
-		}
-
-		public void OnDestroy()
-		{
-			if (Instance == this)
-			{
-				Instance = null;
-			}
-		}
 
 		private void Start()
 		{
@@ -97,7 +76,7 @@ namespace Project
 
 				_settings = newSettings;
 
-				OnSettingsUpdated?.Invoke();
+				SettingsUpdated?.Invoke();
 			}
 		}
 
@@ -105,7 +84,7 @@ namespace Project
 		{
 			_localization.Load();
 
-			OnLocalizationUpdated?.Invoke();
+			LocalizationUpdated?.Invoke();
 		}
 
 		public void IncrementStartingValue()

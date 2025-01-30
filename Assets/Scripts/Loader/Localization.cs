@@ -46,7 +46,7 @@ namespace Project
 
 			_loader = new(_path, settingsLocaleName);
 
-			var jsonData = _loader.TryLoad(out items);
+			_loader.TryLoad(out items);
 		}
 
 		public string Get(string key)

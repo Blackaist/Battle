@@ -22,15 +22,15 @@ namespace Project
 		{
 			if (ClientManager.Instance != null)
 			{
-				ClientManager.Instance.OnSetEntity += OnSetEntity;
-				ClientManager.Instance.OnAbilitySelected += OnAbilitySelected;
-				ClientManager.Instance.OnNextTurn += NextTurn;
+				ClientManager.Instance.SetEntity += OnSetEntity;
+				ClientManager.Instance.AbilitySelected += OnAbilitySelected;
+				ClientManager.Instance.NextTurn += NextTurn;
 
 				_view.OnAbilityPressed += OnAbilityPressed;
 				_view.OnRestartPressed += RestartGame;
 
-				_leftPlayer.OnAbilityExecuted += OnPlayerAbilityExecuted;
-				_rightPlayer.OnAbilityExecuted += OnPlayerAbilityExecuted;
+				_leftPlayer.AbilityExecuted += OnPlayerAbilityExecuted;
+				_rightPlayer.AbilityExecuted += OnPlayerAbilityExecuted;
 			}
 		}
 
@@ -38,15 +38,15 @@ namespace Project
 		{
 			if (gameObject != null && ClientManager.Instance != null)
 			{
-				ClientManager.Instance.OnSetEntity -= OnSetEntity;
-				ClientManager.Instance.OnAbilitySelected -= OnAbilitySelected;
-				ClientManager.Instance.OnNextTurn -= NextTurn;
+				ClientManager.Instance.SetEntity -= OnSetEntity;
+				ClientManager.Instance.AbilitySelected -= OnAbilitySelected;
+				ClientManager.Instance.NextTurn -= NextTurn;
 
 				_view.OnAbilityPressed -= OnAbilityPressed;
 				_view.OnRestartPressed -= RestartGame;
 
-				_leftPlayer.OnAbilityExecuted -= OnPlayerAbilityExecuted;
-				_rightPlayer.OnAbilityExecuted -= OnPlayerAbilityExecuted;
+				_leftPlayer.AbilityExecuted -= OnPlayerAbilityExecuted;
+				_rightPlayer.AbilityExecuted -= OnPlayerAbilityExecuted;
 			}
 		}
 
@@ -85,10 +85,7 @@ namespace Project
 			var currentPlayer = _isLeftPlayerTurn ? _leftPlayer : _rightPlayer;
 			currentPlayer.ExecuteAbility(abilityName);
 
-			if (_leftPlayer.CurrentHP == 0 || _rightPlayer.CurrentHP == 0)
-			{
-				GameOver();
-			}
+			CheckPlayerHP();
 		}
 
 		private void OnPlayerAbilityExecuted(IAbility ability)
@@ -115,6 +112,8 @@ namespace Project
 			}
 
 			_view.UpdateStateButtons(_isLeftPlayerTurn);
+
+			CheckPlayerHP();
 		}
 
 		private void UpdatePlayer(IPlayer nextPlayer, IPlayer prevPlayer)
@@ -135,6 +134,14 @@ namespace Project
 			_view.GameStart();
 
 			NextTurn(true);
+		}
+		
+		private void CheckPlayerHP()
+		{
+			if (_leftPlayer.CurrentHP == 0 || _rightPlayer.CurrentHP == 0)
+			{
+				GameOver();
+			}
 		}
 
 		private void GameOver()

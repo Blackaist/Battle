@@ -33,7 +33,7 @@ namespace Project.UI
 
 			if (ClientManager.Instance)
 			{
-				ClientManager.Instance.OnLoaded += OnAssetsUpdated;
+				ClientManager.Instance.Loaded += OnAssetsUpdated;
 			}
 		}
 
@@ -44,9 +44,8 @@ namespace Project.UI
 
 			if (ClientManager.Instance)
 			{
-				ClientManager.Instance.OnLoaded -= OnAssetsUpdated;
+				ClientManager.Instance.Loaded -= OnAssetsUpdated;
 			}
-
 		}
 
 		public void OnUpdateContentPressed()
@@ -65,7 +64,7 @@ namespace Project.UI
 
 		private void OnAssetsUpdated()
 		{
-			ClearCardView();
+			DestroyCardView();
 			Build();
 		}
 
@@ -107,11 +106,11 @@ namespace Project.UI
 
 		private void Dispose()
 		{
-			ClearCardView();
+			DestroyCardView();
 			gameObject.SetActive(false);
 		}
 
-		private void ClearCardView()
+		private void DestroyCardView()
 		{
 			foreach (var cardView in _cards)
 			{
